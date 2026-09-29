@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../../site.config.mjs';
+---
+
+<Base title="Terms of Use" description={`Terms of use for ${SITE.name}.`} h1="Terms of Use">
+  <section class="content card">
+    <p><i>Last updated: September 2026</i></p>
+    <p>By using {SITE.name} you agree to these terms.</p>
+    <h2>Use of the tools</h2>
+    <p>
+      All tools are provided free of charge, “as is”, without any warranty. We are not responsible
+      for how you use the generated text, or for any app or game rejecting it.
+    </p>
+    <h2>Third-party content</h2>
+    <p>
+      YouTube thumbnails belong to their respective creators. The thumbnail tool only shows images
+      that YouTube makes publicly available. You are responsible for respecting copyright.
+    </p>
+    <h2>Advertising</h2>
+    <p>
+      The website is supported by third-party ads. We are not responsible for the content of ads or
+      of websites they link to.
+    </p>
+    <h2>Changes</h2>
+    <p>We may update these terms at any time. Continued use of the website means you accept them.</p>
+    <p>Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  </section>
+</Base>

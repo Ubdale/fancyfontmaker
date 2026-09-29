@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../../site.config.mjs';
+---
+
+<Base title="About" description={`About ${SITE.name} — free fancy fonts and text tools.`} h1={`About ${SITE.name}`}>
+  <section class="content card">
+    <p>
+      {SITE.name} is a collection of free, simple text tools. Make fancy fonts for Instagram and
+      TikTok, create stylish Free Fire and PUBG names, find bio ideas, copy cool symbols and more.
+    </p>
+    <p>
+      Every tool works right in your browser — no sign-up, no downloads and nothing you type is
+      stored. The site is free because it is supported by ads.
+    </p>
+    <p>Have an idea for a new tool? <a href="/contact/">Contact us</a>.</p>
+  </section>
+</Base>

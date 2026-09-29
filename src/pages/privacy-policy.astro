@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../../site.config.mjs';
+---
+
+<Base title="Privacy Policy" description={`Privacy policy for ${SITE.name}.`} h1="Privacy Policy">
+  <section class="content card">
+    <p><i>Last updated: September 2026</i></p>
+    <p>
+      {SITE.name} ({SITE.url}) respects your privacy. This page explains what information is
+      collected when you use this website.
+    </p>
+    <h2>Text you type</h2>
+    <p>
+      All tools on this website run inside your browser. The text you type into the font generator,
+      bio generator, word counter and other tools is not sent to or stored on our servers.
+    </p>
+    <h2>Advertising</h2>
+    <p>
+      This website shows ads from third-party advertising partners, including Adsterra. These
+      partners may use cookies, web beacons and similar technologies to show ads, measure their
+      performance and prevent fraud. They may collect information such as your IP address, browser
+      type, device type and pages visited. Please see the privacy policies of these partners for
+      details. You can disable cookies in your browser settings.
+    </p>
+    <h2>Analytics and hosting</h2>
+    <p>
+      Our hosting provider (Cloudflare) may keep standard server logs, such as IP address and
+      request time, for security and performance.
+    </p>
+    <h2>Children</h2>
+    <p>
+      This website is not directed at children under 13, and we do not knowingly collect personal
+      information from them.
+    </p>
+    <h2>Contact</h2>
+    <p>Questions about this policy? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </section>
+</Base>

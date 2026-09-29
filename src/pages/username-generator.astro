@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  {
+    q: 'How do I pick a good username?',
+    a: 'Keep it short, easy to spell and easy to remember. Avoid too many numbers so people can find you.',
+  },
+  {
+    q: 'Are these usernames available?',
+    a: 'The tool creates ideas, it cannot check availability. Try your favourite on the app — if it is taken, press Generate again.',
+  },
+  {
+    q: 'Can I use these as gamer tags?',
+    a: 'Yes. Pick the Gaming style, then decorate it with the Free Fire or PUBG name style tools.',
+  },
+];
+---
+
+<Base
+  title="Username Generator — Cool Name Ideas for Instagram & Games"
+  description="Free username generator. Get cool, cute, aesthetic and gaming username ideas for Instagram, TikTok, Free Fire, PUBG and more."
+  h1="Username Generator 👤"
+  intro="Enter a word or your name and get dozens of cool username ideas. Tap one to copy."
+  faq={faq}
+>
+  <div id="user-gen">
+    <div class="tool-box card">
+      <input class="input" type="text" placeholder="Your name or a word (e.g. Ali)" maxlength="20" aria-label="Keyword" />
+      <div class="tabs">
+        <button type="button" class="active" data-style="cool">Cool</button>
+        <button type="button" data-style="cute">Cute</button>
+        <button type="button" data-style="aesthetic">Aesthetic</button>
+        <button type="button" data-style="gaming">Gaming</button>
+        <button type="button" data-style="pro">Professional</button>
+      </div>
+      <button type="button" class="btn gen">🎲 Generate new names</button>
+    </div>
+    <div class="results"></div>
+  </div>
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Tips for a great username</h2>
+      <ul>
+        <li>Use the same username on every app so fans can find you.</li>
+        <li>Dots and underscores (ali.writes, ali_x) help when a name is taken.</li>
+        <li>For games, style your username with the <a href="/free-fire-name-style/">Free Fire name style</a> tool.</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>
+
+<script>
+  const WORDS = {
+    cool: {
+      pre: ['the', 'its', 'real', 'mr', 'official', 'im', 'just', 'iam', 'hey', 'urban'],
+      suf: ['x', 'official', 'vibes', 'zone', 'world', 'hq', 'live', 'nation', 'king', 'boss', 'squad'],
+      words: ['Shadow', 'Blaze', 'Storm', 'Frost', 'Nova', 'Vortex', 'Rebel', 'Titan', 'Ace', 'Zen'],
+    },
+    cute: {
+      pre: ['little', 'baby', 'sweet', 'honey', 'bunny', 'cutie', 'lil', 'tiny', 'sunny', 'peachy'],
+      suf: ['bear', 'bunny', 'pie', 'cupcake', 'kitty', 'boo', 'petal', 'bloom', 'heart', 'star'],
+      words: ['Mochi', 'Cookie', 'Daisy', 'Peach', 'Bubbles', 'Candy', 'Muffin', 'Kiwi', 'Berry', 'Panda'],
+    },
+    aesthetic: {
+      pre: ['moon', 'soft', 'velvet', 'lunar', 'hazy', 'dreamy', 'ethereal', 'cloud', 'misty', 'golden'],
+      suf: ['aura', 'dreams', 'daze', 'bloom', 'haze', 'skies', 'waves', 'light', 'glow', 'soul'],
+      words: ['Luna', 'Aurora', 'Celeste', 'Solstice', 'Serene', 'Mirage', 'Lucid', 'Ivy', 'Nyx', 'Echo'],
+    },
+    gaming: {
+      pre: ['pro', 'xx', 'dark', 'killer', 'sniper', 'ghost', 'toxic', 'rush', 'deadly', 'silent'],
+      suf: ['gamer', 'yt', 'op', 'ff', 'pubg', 'killer', 'sniper', 'plays', 'gg', 'xd', '99', '007'],
+      words: ['Reaper', 'Venom', 'Viper', 'Phantom', 'Havoc', 'Rogue', 'Raptor', 'Wolf', 'Hunter', 'Ninja'],
+    },
+    pro: {
+      pre: ['the', 'hello', 'meet', 'team', 'studio', 'hi', 'with', 'by'],
+      suf: ['official', 'studio', 'hq', 'media', 'design', 'creates', 'works', 'digital', 'co', 'writes'],
+      words: ['Studio', 'Digital', 'Media', 'Creative', 'Labs', 'Works', 'Pixel', 'Brand', 'Craft', 'Vision'],
+    },
+  };
+
+  const root = document.getElementById('user-gen');
+  const input = root.querySelector('input');
+  const list = root.querySelector('.results');
+  let style = 'cool';
+
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const num = () => String(Math.floor(Math.random() * 99) + 1);
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function generate() {
+    const w = WORDS[style];
+    const base = (input.value.trim().replace(/[^a-zA-Z0-9]/g, '') || pick(w.words)).toLowerCase();
+    const patterns = [
+      () => `${pick(w.pre)}${base}`,
+      () => `${base}${pick(w.suf)}`,
+      () => `${pick(w.pre)}.${base}`,
+      () => `${base}_${pick(w.suf)}`,
+      () => `${pick(w.pre)}_${base}_${pick(w.suf)}`,
+      () => `${base}.${pick(w.suf)}`,
+      () => `${base}${num()}`,
+      () => `${cap(base)}${cap(pick(w.words).toLowerCase())}`,
+      () => `${pick(w.words).toLowerCase()}.${base}`,
+      () => `x${base}x`,
+      () => `${base}__`,
+      () => `_${base}.${pick(w.suf)}_`,
+      () => `${cap(pick(w.pre))}${cap(base)}`,
+      () => `${base}${pick(w.suf)}${num()}`,
+    ];
+    const names = new Set();
+    let guard = 0;
+    while (names.size < 24 && guard++ < 200) names.add(pick(patterns)());
+    list.innerHTML = [...names]
+      .map((n) => `<div class="result" data-copy="${n}" role="button" tabindex="0">
+        <div class="body"><span class="text">${n}</span></div>
+        <span class="btn small copy-btn">Copy</span></div>`)
+      .join('');
+  }
+
+  root.querySelectorAll('.tabs button').forEach((b) =>
+    b.addEventListener('click', () => {
+      root.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('active', x === b));
+      style = b.dataset.style;
+      generate();
+    }),
+  );
+  root.querySelector('.gen').addEventListener('click', generate);
+  input.addEventListener('input', generate);
+  generate();
+</script>

@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  {
+    q: 'How are words counted?',
+    a: 'A word is any group of characters separated by spaces or line breaks.',
+  },
+  {
+    q: 'How is reading time calculated?',
+    a: 'Reading time assumes 200 words per minute; speaking time assumes 130 words per minute.',
+  },
+  {
+    q: 'Is my text saved or uploaded?',
+    a: 'No. Everything is counted inside your browser. Your text never leaves your device.',
+  },
+];
+---
+
+<Base
+  title="Word Counter — Count Words & Characters Online"
+  description="Free online word counter. Count words, characters, sentences, paragraphs and reading time instantly. Check Instagram, Twitter and essay limits."
+  h1="Word Counter 🔢"
+  intro="Paste or type your text to count words, characters, sentences and reading time instantly."
+  faq={faq}
+>
+  <div id="wc" class="card">
+    <textarea class="input" placeholder="Start typing or paste your text here…" aria-label="Your text"></textarea>
+    <div class="stats">
+      <div class="card stat"><b data-k="words">0</b><span>Words</span></div>
+      <div class="card stat"><b data-k="chars">0</b><span>Characters</span></div>
+      <div class="card stat"><b data-k="noSpace">0</b><span>Without spaces</span></div>
+      <div class="card stat"><b data-k="sentences">0</b><span>Sentences</span></div>
+      <div class="card stat"><b data-k="paragraphs">0</b><span>Paragraphs</span></div>
+      <div class="card stat"><b data-k="read">0s</b><span>Reading time</span></div>
+    </div>
+    <p class="muted limits" style="font-size:.88rem;margin:12px 0 0"></p>
+  </div>
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Character limits on social media</h2>
+      <ul>
+        <li>Instagram bio: 150 characters · caption: 2,200</li>
+        <li>Twitter / X post: 280 characters</li>
+        <li>TikTok bio: 80 characters · caption: 4,000</li>
+        <li>YouTube title: 100 characters · description: 5,000</li>
+        <li>Google meta description: about 155–160 characters</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>
+
+<script>
+  const root = document.getElementById('wc');
+  const input = root.querySelector('textarea');
+  const out = Object.fromEntries([...root.querySelectorAll('[data-k]')].map((el) => [el.dataset.k, el]));
+  const limits = root.querySelector('.limits');
+
+  const LIMITS = [
+    ['Twitter/X', 280],
+    ['Instagram bio', 150],
+    ['TikTok bio', 80],
+  ];
+
+  function fmtTime(words) {
+    const secs = Math.ceil((words / 200) * 60);
+    return secs < 60 ? `${secs}s` : `${Math.round(secs / 60)} min`;
+  }
+
+  function update() {
+    const t = input.value;
+    const chars = Array.from(t).length;
+    const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+    out.words.textContent = words.toLocaleString();
+    out.chars.textContent = chars.toLocaleString();
+    out.noSpace.textContent = Array.from(t.replace(/\s/g, '')).length.toLocaleString();
+    out.sentences.textContent = (t.match(/[^.!?\n]+[.!?]+/g) || (t.trim() ? [t] : [])).length.toLocaleString();
+    out.paragraphs.textContent = t.split(/\n\s*\n/).filter((p) => p.trim()).length.toLocaleString();
+    out.read.textContent = fmtTime(words);
+    limits.textContent = chars
+      ? LIMITS.map(([n, max]) => `${n}: ${chars <= max ? '✅' : '❌'} ${chars}/${max}`).join('  ·  ')
+      : '';
+  }
+
+  input.addEventListener('input', update);
+</script>

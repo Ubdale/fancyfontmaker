@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import TextTransform from '../components/TextTransform.astro';
+
+const faq = [
+  {
+    q: 'How do I cross out text on Instagram or Facebook?',
+    a: 'These apps have no strikethrough button. Type your text here, copy the result and paste it — the line through the letters stays.',
+  },
+  {
+    q: 'Does strikethrough text work on WhatsApp?',
+    a: 'Yes. You can also use ~text~ in WhatsApp, but the text from this tool works in every app, including names and bios.',
+  },
+];
+---
+
+<Base
+  title="Strikethrough Text Generator — S̶t̶r̶i̶k̶e̶ & U̲n̲d̲e̲r̲l̲i̲n̲e̲"
+  description="Free strikethrough text generator. Cross out text (s̶t̶r̶i̶k̶e̶), underline, double underline and slash text. Copy and paste into Instagram, Facebook, Twitter."
+  h1="Strikethrough Text Generator S̶t̶r̶i̶k̶e̶"
+  intro="Type your text to get crossed-out and underlined versions you can paste anywhere."
+  faq={faq}
+>
+  <h2 style="font-size:1.1rem">S̶t̶r̶i̶k̶e̶t̶h̶r̶o̶u̶g̶h̶</h2>
+  <TextTransform transform="strike" sample="This is crossed out" />
+  <h2 style="font-size:1.1rem;margin-top:20px">U̲n̲d̲e̲r̲l̲i̲n̲e̲</h2>
+  <TextTransform transform="underline" sample="This is underlined" />
+  <h2 style="font-size:1.1rem;margin-top:20px">S̸l̸a̸s̸h̸</h2>
+  <TextTransform transform="slash" sample="This is slashed" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Why use strikethrough text?</h2>
+      <p>
+        Crossed-out text is great for jokes (“I ~~love~~ tolerate Mondays”), price drops (“$̶5̶0̶ $25”)
+        and edits. Since most social apps have no formatting buttons, Unicode strikethrough is the
+        easiest way to do it.
+      </p>
+    </section>
+  </Fragment>
+</Base>

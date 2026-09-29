@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  {
+    q: 'How do I download a YouTube thumbnail?',
+    a: 'Copy the video link from YouTube, paste it in the box and press Get Thumbnails. Then press Download under the size you want.',
+  },
+  {
+    q: 'Does it work with YouTube Shorts?',
+    a: 'Yes. Paste a Shorts link (youtube.com/shorts/...) and it works the same way.',
+  },
+  {
+    q: 'Why is the HD (1280×720) image missing?',
+    a: 'Some older or smaller videos never had an HD thumbnail uploaded. Use the next largest size instead.',
+  },
+  {
+    q: 'Can I use downloaded thumbnails anywhere?',
+    a: 'Thumbnails belong to the video creator. Use them for personal reference, and ask the creator before reusing them publicly.',
+  },
+];
+---
+
+<Base
+  title="YouTube Thumbnail Downloader — Download HD Thumbnails Free"
+  description="Free YouTube thumbnail downloader. Paste a video or Shorts link and download the thumbnail in HD (1280x720), SD and other sizes."
+  h1="YouTube Thumbnail Downloader 🖼️"
+  intro="Paste any YouTube video or Shorts link to download its thumbnail in HD, SD and more sizes."
+  faq={faq}
+>
+  <div id="yt">
+    <form class="card" style="margin-bottom:14px">
+      <input class="input" type="url" placeholder="https://www.youtube.com/watch?v=…" aria-label="YouTube link" required />
+      <div class="row" style="margin-top:10px">
+        <button class="btn" type="submit">Get Thumbnails</button>
+        <span class="error" style="color:#ef4444"></span>
+      </div>
+    </form>
+    <div class="thumbs"></div>
+  </div>
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Thumbnail sizes</h2>
+      <ul>
+        <li><b>HD</b> — 1280 × 720 (best quality, when available)</li>
+        <li><b>SD</b> — 640 × 480</li>
+        <li><b>HQ</b> — 480 × 360</li>
+        <li><b>MQ</b> — 320 × 180</li>
+      </ul>
+      <h2>Why download thumbnails?</h2>
+      <p>
+        Creators study top thumbnails for design ideas, save their own thumbnails as a backup, or use
+        them in presentations and reviews. This tool gets the original image straight from YouTube.
+      </p>
+    </section>
+  </Fragment>
+</Base>
+
+<script>
+  import { showToast } from '../lib/copy.js';
+
+  const SIZES = [
+    { key: 'maxresdefault', label: 'HD 1280×720' },
+    { key: 'sddefault', label: 'SD 640×480' },
+    { key: 'hqdefault', label: 'HQ 480×360' },
+    { key: 'mqdefault', label: 'MQ 320×180' },
+  ];
+
+  function getId(url) {
+    const m = url.match(
+      /(?:youtube\.com\/(?:watch\?.*?v=|shorts\/|embed\/|live\/|v\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+    );
+    if (m) return m[1];
+    return /^[A-Za-z0-9_-]{11}$/.test(url.trim()) ? url.trim() : null;
+  }
+
+  async function download(src, name) {
+    try {
+      const res = await fetch(src);
+      const blob = await res.blob();
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      showToast('Downloading…');
+    } catch {
+      // Browser blocked the direct download — open the image so the user can save it.
+      window.open(src, '_blank', 'noopener');
+    }
+  }
+
+  const root = document.getElementById('yt');
+  const form = root.querySelector('form');
+  const out = root.querySelector('.thumbs');
+  const error = root.querySelector('.error');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = getId(form.querySelector('input').value);
+    error.textContent = '';
+    if (!id) {
+      error.textContent = 'That does not look like a YouTube link.';
+      out.innerHTML = '';
+      return;
+    }
+    out.innerHTML = SIZES.map(
+      (s) => `<div class="thumb card">
+        <img src="https://i.ytimg.com/vi/${id}/${s.key}.jpg" alt="YouTube thumbnail ${s.label}" loading="lazy" />
+        <div class="row"><b>${s.label}</b>
+        <button class="btn small" data-src="https://i.ytimg.com/vi/${id}/${s.key}.jpg" data-name="${id}-${s.key}.jpg">⬇ Download</button></div>
+      </div>`,
+    ).join('');
+
+    // YouTube returns a 120×90 grey placeholder when a size doesn't exist — hide those.
+    out.querySelectorAll('img').forEach((img) =>
+      img.addEventListener('load', () => {
+        if (img.naturalWidth <= 120) img.closest('.thumb').remove();
+      }),
+    );
+  });
+
+  out.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-src]');
+    if (btn) download(btn.dataset.src, btn.dataset.name);
+  });
+</script>

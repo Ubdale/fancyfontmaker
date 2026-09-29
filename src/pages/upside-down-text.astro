@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import TextTransform from '../components/TextTransform.astro';
+
+const faq = [
+  {
+    q: 'How does upside down text work?',
+    a: 'Each letter is swapped for a Unicode character that looks like it is flipped, and the order is reversed so it reads correctly when the phone is turned around.',
+  },
+  {
+    q: 'Where can I use upside down text?',
+    a: 'Anywhere you can paste text — WhatsApp, Instagram, TikTok comments, Discord and more.',
+  },
+];
+---
+
+<Base
+  title="Upside Down Text Generator ǝʇsɐԀ ⅋ ʎdoↃ"
+  description="Flip text upside down online. Free upside down text generator — type, copy and paste flipped text into WhatsApp, Instagram and Discord."
+  h1="Upside Down Text ʇxǝ⊥ uʍoᗡ ǝpᴉsd∩"
+  intro="Type your text and it flips upside down instantly. Copy and paste it anywhere."
+  faq={faq}
+>
+  <TextTransform transform="upsideDown" sample="Hello, turn your phone around!" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Fun ways to use flipped text</h2>
+      <ul>
+        <li>Prank friends in group chats with messages they have to turn their phone to read.</li>
+        <li>Make your bio or username look unusual.</li>
+        <li>Try <a href="/strikethrough-text/">strikethrough text</a> and <a href="/">fancy fonts</a> too.</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>

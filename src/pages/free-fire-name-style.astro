@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'How do I change my Free Fire name to a stylish name?',
+    a: 'Create your stylish name here and copy it. In Free Fire, tap your profile → the edit (pencil) icon next to your name → paste it and confirm. Changing your name costs diamonds or a Name Change Card.',
+  },
+  {
+    q: 'How long can a Free Fire name be?',
+    a: 'Free Fire names can be up to 12 characters. Symbols and fancy letters count as characters, so keep your name short.',
+  },
+  {
+    q: 'Why does Free Fire say my name is invalid?',
+    a: 'Some symbols are not supported by the game. If a name is rejected, try a different style or a simpler decoration.',
+  },
+];
+---
+
+<Base
+  title="Free Fire Name Style — Stylish FF Names with Symbols ꧁༒☬"
+  description="Free Fire name style generator. Create stylish FF names with symbols like ꧁꧂ 亗 ★彡 and cool fonts. Copy and paste into Free Fire, free."
+  h1="Free Fire Name Style ꧁🔥꧂"
+  intro="Type your name and get stylish Free Fire names with symbols and cool fonts. Tap to copy, then paste it in the game."
+  faq={faq}
+>
+  <FontGenerator mode="names" placeholder="Type your FF name…" sample="Hunter" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Stylish Free Fire names</h2>
+      <p>
+        A stylish Free Fire name makes you stand out in the lobby and the kill feed. Players love
+        decorations like <b>꧁༒☬ Name ☬༒꧂</b>, <b>亗 Name 亗</b>, <b>★彡 Name 彡★</b> and
+        <b>×͜× Name</b>. This generator mixes these symbols with fancy fonts so every name looks unique.
+      </p>
+      <h2>Tips for a good FF name</h2>
+      <ul>
+        <li>Keep it within 12 characters, including symbols.</li>
+        <li>Use a short base name like “Ghost”, “Killer” or your nickname.</li>
+        <li>Press <b>Shuffle styles</b> to get new font combinations.</li>
+        <li>Need a base name? Use the <a href="/username-generator/">username generator</a>.</li>
+      </ul>
+      <p>Also playing PUBG or BGMI? Try the <a href="/pubg-name-generator/">PUBG name generator</a>.</p>
+    </section>
+  </Fragment>
+</Base>

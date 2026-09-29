@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../../site.config.mjs';
+---
+
+<Base title="Contact" description={`Contact ${SITE.name}.`} h1="Contact Us">
+  <section class="content card">
+    <p>Questions, suggestions or a bug to report? We would love to hear from you.</p>
+    <p>
+      Email: <a href={`mailto:${SITE.email}`}><b>{SITE.email}</b></a>
+    </p>
+    <p class="muted">We usually reply within 2–3 days.</p>
+  </section>
+</Base>

@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'How do I change the font in my Instagram bio?',
+    a: 'Type your bio here, copy the style you like, then open Instagram → Edit profile → Bio and paste it.',
+  },
+  {
+    q: 'Can I use these fonts in my Instagram name?',
+    a: 'Yes. Paste them into the Name field. Keep the plain version in your username (the @ handle) because it only allows letters, numbers, dots and underscores.',
+  },
+  {
+    q: 'Do Instagram fonts work in captions and comments?',
+    a: 'Yes, they work in bios, names, captions, comments, stories and DMs.',
+  },
+];
+---
+
+<Base
+  title="Instagram Fonts 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮 — Cool Fonts for IG Bio"
+  description="Free Instagram fonts generator. Copy and paste cool, cute and aesthetic fonts for your Instagram bio, name, captions and stories."
+  h1="Instagram Fonts 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮"
+  intro="Make your Instagram bio and name stand out with cute, aesthetic and cool fonts. Type below and tap to copy."
+  faq={faq}
+>
+  <FontGenerator placeholder="Type your Instagram name or bio…" sample="Instagram Bio" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Best fonts for Instagram</h2>
+      <p>
+        The most popular Instagram fonts are <b>Script</b> (𝓵𝓲𝓴𝓮 𝓽𝓱𝓲𝓼) for a cute, aesthetic look,
+        <b>Bold</b> (𝐥𝐢𝐤𝐞 𝐭𝐡𝐢𝐬) for headings, <b>Small Caps</b> (ʟɪᴋᴇ ᴛʜɪꜱ) for a clean minimal
+        style, and <b>Aesthetic</b> (ｌｉｋｅ ｔｈｉｓ) for vaporwave vibes.
+      </p>
+      <h2>Tips for a great Instagram bio</h2>
+      <ul>
+        <li>Use fancy fonts for your name or one key line, not the whole bio — it stays easy to read.</li>
+        <li>Mix in a few <a href="/symbols/">symbols and emoji</a> like ✨ ♡ ☾ to decorate.</li>
+        <li>Need ideas? Try the <a href="/instagram-bio-generator/">Instagram bio generator</a>.</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>

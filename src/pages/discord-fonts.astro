@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'How do I use fancy fonts on Discord?',
+    a: 'Copy a style from this page and paste it into your nickname, server name, channel name or any message.',
+  },
+  {
+    q: 'Can I use fancy fonts in Discord channel names?',
+    a: 'Yes. Discord channel names support most Unicode fonts, although spaces are turned into dashes in text channels.',
+  },
+  {
+    q: 'Is this the same as Discord markdown?',
+    a: 'No. Markdown like **bold** only works in messages. Unicode fonts from this page work everywhere, including names.',
+  },
+];
+---
+
+<Base
+  title="Discord Fonts 𝕮𝖔𝖕𝖞 & 𝕻𝖆𝖘𝖙𝖊 — Fancy Text for Discord"
+  description="Discord fonts generator. Copy and paste fancy fonts for your Discord nickname, server name, channel names and messages. Free."
+  h1="Discord Fonts 𝕮𝖔𝖕𝖞 & 𝕻𝖆𝖘𝖙𝖊"
+  intro="Style your Discord nickname, server and channels with fancy Unicode fonts. Tap any style to copy."
+  faq={faq}
+>
+  <FontGenerator placeholder="Type your Discord name…" sample="Discord Server" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Fonts for Discord servers</h2>
+      <p>
+        Server owners use fancy fonts to make channel lists look clean and organised, for example
+        <b>「💬」ɢᴇɴᴇʀᴀʟ</b> or <b>📢・𝐚𝐧𝐧𝐨𝐮𝐧𝐜𝐞𝐦𝐞𝐧𝐭𝐬</b>. Small Caps and Bold are the most
+        readable choices for channel names.
+      </p>
+      <p>Decorate further with <a href="/symbols/">cool symbols</a> like 「」 ・ ┊ ⌗.</p>
+    </section>
+  </Fragment>
+</Base>

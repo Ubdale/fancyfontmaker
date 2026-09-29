@@ -1,0 +1,85 @@
+---
+// The main tool: type text, get a list of fancy styles, tap one to copy.
+// mode="fonts": plain font styles first, then decorated ones.
+// mode="names": decorated gaming-name styles first (Free Fire, PUBG...).
+interface Props {
+  mode?: 'fonts' | 'names';
+  placeholder?: string;
+  sample?: string;
+}
+
+const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy Font' } = Astro.props;
+---
+
+<div class="font-gen" data-mode={mode} data-sample={sample}>
+  <div class="tool-box card">
+    <input class="input" type="text" placeholder={placeholder} aria-label="Your text" maxlength="200" />
+    <div class="row" style="margin-top:10px">
+      <button type="button" class="btn secondary small shuffle">🎲 Shuffle styles</button>
+      <button type="button" class="btn secondary small clear">✖ Clear</button>
+      <span class="muted" style="font-size:.85rem">Tap any style to copy</span>
+    </div>
+  </div>
+  <div class="results" aria-live="polite"></div>
+</div>
+
+<script>
+  import { STYLES, DECORATIONS, decorate } from '../lib/fonts.js';
+
+  const escapeHtml = (s) =>
+    s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+  // Styles that read well inside a decoration.
+  const NAME_STYLES = STYLES.filter((s) =>
+    ['Bold', 'Bold Script', 'Script', 'Bold Gothic', 'Gothic', 'Double Struck', 'Small Caps',
+      'Sans Bold', 'Bold Italic', 'Monospace', 'Thai Style', 'Magic', 'Russian Style', 'Tiny',
+      'Greek Style', 'Wide', 'Black Bubble', 'Bubble'].includes(s.name),
+  );
+
+  for (const root of document.querySelectorAll('.font-gen')) {
+    const input = root.querySelector('input');
+    const list = root.querySelector('.results');
+    const mode = root.dataset.mode;
+    const sample = root.dataset.sample;
+    let seed = 0;
+
+    const pickStyle = (i) => NAME_STYLES[(i * 7 + seed) % NAME_STYLES.length];
+
+    function build(text) {
+      const plain = STYLES.map((s) => ({ label: s.name, value: s.fn(text) }));
+      const decorated = DECORATIONS.map((d, i) => {
+        const s = pickStyle(i);
+        return { label: `${s.name} + decoration`, value: decorate(s.fn(text), d) };
+      });
+      return mode === 'names' ? [...decorated, ...plain] : [...plain, ...decorated];
+    }
+
+    function render() {
+      const text = input.value.trim() || sample;
+      list.innerHTML = build(text)
+        .map(
+          (r) => `<div class="result" data-copy="${escapeHtml(r.value)}" role="button" tabindex="0">
+            <div class="body"><span class="label">${escapeHtml(r.label)}</span><span class="text">${escapeHtml(r.value)}</span></div>
+            <span class="btn small copy-btn">Copy</span>
+          </div>`,
+        )
+        .join('');
+    }
+
+    input.addEventListener('input', render);
+    root.querySelector('.shuffle').addEventListener('click', () => {
+      seed = Math.floor(Math.random() * 1000);
+      render();
+    });
+    root.querySelector('.clear').addEventListener('click', () => {
+      input.value = '';
+      input.focus();
+      render();
+    });
+    list.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.matches('.result')) e.target.click();
+    });
+
+    render();
+  }
+</script>

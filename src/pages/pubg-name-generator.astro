@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'How do I change my PUBG / BGMI name?',
+    a: 'Copy a stylish name from this page. In the game open Inventory → Consumables → Rename Card, paste the name and confirm.',
+  },
+  {
+    q: 'How many characters can a PUBG name have?',
+    a: 'PUBG Mobile and BGMI allow up to 14 characters. Fancy letters and symbols count as characters.',
+  },
+  {
+    q: 'Why is my stylish name not accepted?',
+    a: 'Some Unicode symbols are blocked by the game. Try another style or remove one of the symbols.',
+  },
+];
+---
+
+<Base
+  title="PUBG Name Generator — Stylish BGMI Names with Symbols"
+  description="PUBG and BGMI stylish name generator. Create cool PUBG names with symbols like ▄︻デ══━一 and 乂 and fancy fonts. Copy and paste, free."
+  h1="PUBG Name Generator ▄︻デ══━一"
+  intro="Create cool, stylish PUBG Mobile and BGMI names with symbols. Type your name and tap a style to copy."
+  faq={faq}
+>
+  <FontGenerator mode="names" placeholder="Type your PUBG name…" sample="Sniper" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Cool PUBG and BGMI names</h2>
+      <p>
+        Pro players often use gun and crown symbols in their names, like <b>▄︻デ Name ══━一</b>,
+        <b>乂 Name 乂</b> or <b>♛ Name ♛</b>. This tool combines those symbols with fancy fonts
+        to make a name that nobody else has.
+      </p>
+      <h2>Name ideas</h2>
+      <ul>
+        <li>Short and aggressive: Sniper, Ghost, Reaper, Venom, Viper</li>
+        <li>Clan style: add your clan tag before your name, e.g. <b>乂XYZ乂 Ghost</b></li>
+        <li>Funny: Noob Master, Pan Killer, Chicken Hunter</li>
+      </ul>
+      <p>
+        Want more ideas? Try the <a href="/username-generator/">username generator</a> or the
+        <a href="/free-fire-name-style/">Free Fire name style</a> tool.
+      </p>
+    </section>
+  </Fragment>
+</Base>

@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'How do I change my TikTok name font?',
+    a: 'Copy a style here, open TikTok → Profile → Edit profile → Name, paste it and save.',
+  },
+  {
+    q: 'Can I use fancy fonts in my TikTok username?',
+    a: 'No, the @username only allows letters, numbers, dots and underscores. Use fancy fonts in your Name and Bio instead.',
+  },
+  {
+    q: 'Do fonts work in TikTok captions?',
+    a: 'Yes, they work in captions, comments and your bio.',
+  },
+];
+---
+
+<Base
+  title="TikTok Fonts 𝒞𝑜𝓅𝓎 & 𝒫𝒶𝓈𝓉𝑒 — Cool Fonts for TikTok Bio"
+  description="TikTok fonts generator. Copy and paste cool, aesthetic fonts for your TikTok name, bio, captions and comments. Free and instant."
+  h1="TikTok Fonts 𝒞𝑜𝓅𝓎 & 𝒫𝒶𝓈𝓉𝑒"
+  intro="Get aesthetic and cool fonts for your TikTok name, bio and captions. Tap any style to copy it."
+  faq={faq}
+>
+  <FontGenerator placeholder="Type your TikTok name or bio…" sample="TikTok Star" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Aesthetic TikTok fonts</h2>
+      <p>
+        On TikTok the favourite styles are <b>Script</b>, <b>Small Caps</b>, <b>Aesthetic</b>
+        (ｗｉｄｅ) and <b>Tiny</b> (ᵗⁱⁿʸ) text. Use them in your display name and one line of your
+        bio for a clean, eye-catching profile.
+      </p>
+      <p>Need bio ideas? Try our <a href="/instagram-bio-generator/">bio generator</a> — the bios work on TikTok too.</p>
+    </section>
+  </Fragment>
+</Base>

@@ -1,0 +1,14 @@
+---
+// Renders an Adsterra ad code from site.config.mjs. Renders nothing if the slot is empty.
+import { ADS } from '../../site.config.mjs';
+
+interface Props {
+  slot: keyof typeof ADS;
+  class?: string;
+}
+
+const { slot, class: className = '' } = Astro.props;
+const code = ADS[slot]?.trim();
+---
+
+{code && <div class:list={['ad', `ad-${slot}`, className]} set:html={code} />}

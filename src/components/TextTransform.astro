@@ -1,0 +1,51 @@
+---
+// Textarea in, transformed text out, with a copy button. `transform` picks a function in the script.
+interface Props {
+  transform: 'upsideDown' | 'mirror' | 'strike' | 'underline' | 'slash' | 'doubleUnderline';
+  placeholder?: string;
+  sample?: string;
+}
+
+const { transform, placeholder = 'Type or paste your text…', sample = '' } = Astro.props;
+---
+
+<div class="text-transform" data-transform={transform}>
+  <div class="card">
+    <textarea class="input" placeholder={placeholder} aria-label="Your text">{sample}</textarea>
+    <div class="card output" style="margin-top:10px;min-height:70px;font-size:1.15rem;white-space:pre-wrap;word-break:break-word" aria-live="polite"></div>
+    <div class="row" style="margin-top:10px">
+      <button type="button" class="btn copy-out">📋 Copy result</button>
+      <button type="button" class="btn secondary clear">✖ Clear</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { upsideDown, mirror } from '../lib/fonts.js';
+  import { copyText } from '../lib/copy.js';
+
+  const combine = (mark) => (t) => Array.from(t).map((c) => (/\s/.test(c) ? c : c + mark)).join('');
+  const FNS = {
+    upsideDown: (t) => t.split('\n').map(upsideDown).reverse().join('\n'),
+    mirror: (t) => t.split('\n').map(mirror).join('\n'),
+    strike: combine('̶'),
+    underline: combine('̲'),
+    doubleUnderline: combine('̳'),
+    slash: combine('̸'),
+  };
+
+  for (const root of document.querySelectorAll('.text-transform')) {
+    const input = root.querySelector('textarea');
+    const output = root.querySelector('.output');
+    const fn = FNS[root.dataset.transform];
+    const render = () => (output.textContent = fn(input.value));
+    input.addEventListener('input', render);
+    root.querySelector('.copy-out').addEventListener('click', () => copyText(output.textContent));
+    root.querySelector('.clear').addEventListener('click', () => {
+      input.value = '';
+      input.focus();
+      render();
+    });
+    render();
+  }
+</script>

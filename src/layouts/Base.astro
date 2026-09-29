@@ -1,0 +1,139 @@
+---
+import { SITE, ADS } from '../../site.config.mjs';
+import { TOOLS } from '../data/nav.js';
+import AdSlot from '../components/AdSlot.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  h1?: string;
+  intro?: string;
+  faq?: { q: string; a: string }[];
+}
+
+const { title, description, h1, intro, faq = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const fullTitle = Astro.url.pathname === '/' ? title : `${title} | ${SITE.name}`;
+const path = Astro.url.pathname;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: h1 ?? title,
+    url: canonical,
+    applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  faq.length && {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+].filter(Boolean);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#7c3aed" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+    {ADS.popunder.trim() && <Fragment set:html={ADS.popunder} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="/" class="logo"><span class="logo-mark">𝓕</span> {SITE.name}</a>
+      </div>
+      <nav class="wrap nav" aria-label="Tools">
+        {TOOLS.map((t) => (
+          <a href={t.href} class:list={{ active: path === t.href || path === t.href.replace(/\/$/, '') }}>
+            {t.short}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main class="wrap">
+      <AdSlot slot="banner728x90" class="desktop-only top-ad" />
+      <AdSlot slot="banner320x50" class="mobile-only top-ad" />
+
+      {h1 && (
+        <section class="hero">
+          <h1>{h1}</h1>
+          {intro && <p>{intro}</p>}
+        </section>
+      )}
+
+      <slot />
+
+      <AdSlot slot="native" />
+
+      <slot name="content" />
+
+      <AdSlot slot="banner300x250" />
+
+      {faq.length > 0 && (
+        <section class="content faq">
+          <h2>Frequently asked questions</h2>
+          {faq.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </section>
+      )}
+
+      <section class="more-tools">
+        <h2>More free tools</h2>
+        <div class="tool-grid">
+          {TOOLS.filter((t) => t.href !== path).map((t) => (
+            <a href={t.href} class="tool-card">
+              <span class="tool-icon">{t.icon}</span>
+              <span>{t.title}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <a href="/about/">About</a> · <a href="/contact/">Contact</a> ·
+          <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
+        </p>
+        <p class="muted">© {new Date().getFullYear()} {SITE.name}. {SITE.tagline}.</p>
+      </div>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite">Copied!</div>
+
+    <script>
+      import { initCopy } from '../lib/copy.js';
+      initCopy();
+    </script>
+
+    {ADS.socialBar.trim() && <Fragment set:html={ADS.socialBar} />}
+  </body>
+</html>

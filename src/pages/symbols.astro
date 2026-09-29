@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+
+const GROUPS = {
+  'Hearts': '♡ ♥ ❤ ❥ ❣ ❦ ❧ ღ ᥫ᭡ 💕 💖 💗 💘 💝 💞 💓 🖤 🤍 💜 💙 💚 💛 🧡 ❤️‍🔥',
+  'Stars & sparkles': '★ ☆ ✦ ✧ ✩ ✪ ✫ ✬ ✭ ✮ ✯ ✰ ⋆ ✨ ⭐ 🌟 💫 ⁂ ⁎ ✱ ✲ ✳ ✴ ✵ ✶ ✷ ✸ ✹ ✺',
+  'Gaming name symbols': '꧁ ꧂ ༒ ☬ 亗 乂 彡 ツ ×͜× ๖ۣۜ ༺ ༻ ◥ ◤ ད ཌ ♛ ♚ ☠ ⚔ ⚡ ▄︻デ ══━一 ☯ 卍 〆 ⫷ ⫸ 𓆩 𓆪',
+  'Brackets': '「 」 『 』 【 】 〖 〗 〘 〙 《 》 〈 〉 ⟦ ⟧ ⦅ ⦆ ⌈ ⌋ ⟨ ⟩ ⎾ ⏌',
+  'Arrows': '→ ← ↑ ↓ ↔ ↕ ⇒ ⇐ ⇑ ⇓ ➜ ➤ ➥ ➔ ➙ ➛ ➝ ➞ ➟ ➠ ⟶ ⟵ ↻ ↺ ⤴ ⤵',
+  'Flowers & nature': '✿ ❀ ❁ ✾ ❃ ❋ ✽ ⚘ 🌸 🌷 🌹 🥀 🌺 🌻 🌼 🍀 🌿 ☘ 🍃 🌙 ☾ ☽ ☼ ☀ ☁ ❄ ☃ 🌊',
+  'Check & cross': '✓ ✔ ☑ ✅ ✗ ✘ ☒ ❌ ✖ ⊗ ⊘',
+  'Music': '♩ ♪ ♫ ♬ ♭ ♮ ♯ 🎵 🎶 🎧 🎤',
+  'Aesthetic dividers': '・ ┊ ┆ ︴ ⋆ ˚ ｡ ⋆｡˚ ⊹ ˖ ✧˖° ﹏ ︵ ︶ ⌗ ⤷ ↳ ୨୧ ♡⃛ ⌒ ‿ ⁀',
+  'Math & misc': '∞ ≈ ≠ ≤ ≥ ± × ÷ √ ∑ π Ω µ ° ℃ ℉ © ® ™ § ¶ † ‡ ‰ № ☎ ✉ ✂ ✈ ☂ ☕ ⚓ ♻ ⚠',
+  'Currency': '$ € £ ¥ ₹ ₨ ₽ ₩ ₿ ¢ ₺ ₦ ₱ ₫ ₴',
+  'Zodiac': '♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓',
+};
+
+const faq = [
+  {
+    q: 'How do I copy a symbol?',
+    a: 'Just tap it. The symbol is copied to your clipboard and you can paste it anywhere.',
+  },
+  {
+    q: 'Can I use these symbols in Free Fire and PUBG names?',
+    a: 'Most of the “Gaming name symbols” work in game names. If one is rejected, try another.',
+  },
+];
+---
+
+<Base
+  title="Cool Symbols ★ Copy & Paste — Text Symbols & Emoji"
+  description="Copy and paste cool symbols: hearts ♡, stars ★, gaming name symbols ꧁꧂ 亗, brackets 「」, arrows ➤ and aesthetic dividers. One tap to copy."
+  h1="Cool Symbols ★ Copy & Paste"
+  intro="Tap any symbol to copy it. Use them in your bio, game name, captions and messages."
+  faq={faq}
+>
+  {Object.entries(GROUPS).map(([title, list]) => (
+    <section style="margin-bottom:18px">
+      <h2 style="font-size:1.1rem;margin:8px 0">{title}</h2>
+      <div class="sym-grid">
+        {list.split(' ').map((s) => (
+          <button type="button" class="sym" data-copy={s} aria-label={`Copy ${s}`}>{s}</button>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>Where to use text symbols</h2>
+      <p>
+        Symbols are regular Unicode characters, so they work in Instagram bios, TikTok names,
+        WhatsApp, Discord and game names. Combine them with <a href="/">fancy fonts</a> to make
+        a name like <b>꧁༒☬ 𝓐𝓵𝓲 ☬༒꧂</b>.
+      </p>
+    </section>
+  </Fragment>
+</Base>

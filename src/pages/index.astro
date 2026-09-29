@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import FontGenerator from '../components/FontGenerator.astro';
+
+const faq = [
+  {
+    q: 'Is this fancy font generator free?',
+    a: 'Yes. Every font and tool on FancyFontMaker is 100% free, needs no sign-up and works on phone and computer.',
+  },
+  {
+    q: 'How do I copy a fancy font?',
+    a: 'Type your text in the box, then tap any style in the list. It is copied instantly and you can paste it anywhere.',
+  },
+  {
+    q: 'Where can I use these fonts?',
+    a: 'Instagram bios and captions, TikTok, Facebook, WhatsApp, Discord, Twitter/X, YouTube comments and game names like Free Fire, PUBG and BGMI.',
+  },
+  {
+    q: 'Why do some letters show as boxes?',
+    a: 'These fonts are Unicode symbols. Very old phones or apps may not support every symbol. If you see boxes, try another style.',
+  },
+];
+---
+
+<Base
+  title="Fancy Font Generator 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮 — Cool Stylish Text"
+  description="Free fancy font generator. Turn normal text into 𝓬𝓾𝓽𝓮, 𝐛𝐨𝐥𝐝, 𝔤𝔬𝔱𝔥𝔦𝔠 & ⓑⓤⓑⓑⓛⓔ fonts. Copy and paste stylish text for Instagram, TikTok, Free Fire, PUBG and Discord."
+  h1="Fancy Font Generator 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮"
+  intro="Type anything and get 60+ cool, stylish fonts instantly. Tap a style to copy it and paste it into Instagram, TikTok, WhatsApp or your game name."
+  faq={faq}
+>
+  <FontGenerator placeholder="Type your name or text…" sample="Fancy Font Maker" />
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>What is a fancy font generator?</h2>
+      <p>
+        A fancy font generator changes normal letters into special Unicode characters that look like
+        different fonts — 𝓼𝓬𝓻𝓲𝓹𝓽, 𝐛𝐨𝐥𝐝, 𝔤𝔬𝔱𝔥𝔦𝔠, 𝕕𝕠𝕦𝕓𝕝𝕖 and many more. Because they are
+        characters and not images, you can copy them and paste them almost anywhere that accepts text.
+      </p>
+      <h2>How to use it</h2>
+      <ol>
+        <li>Type your name or text in the box at the top.</li>
+        <li>Scroll the list — every style updates as you type.</li>
+        <li>Tap the style you like. It is copied automatically.</li>
+        <li>Paste it into your bio, caption, comment or game profile.</li>
+      </ol>
+      <h2>Popular uses</h2>
+      <ul>
+        <li><a href="/instagram-fonts/">Instagram fonts</a> for bios, names and captions</li>
+        <li><a href="/free-fire-name-style/">Free Fire name style</a> and <a href="/pubg-name-generator/">PUBG names</a> with symbols</li>
+        <li><a href="/discord-fonts/">Discord fonts</a> for nicknames and server names</li>
+        <li><a href="/tiktok-fonts/">TikTok fonts</a> for your profile and videos</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>

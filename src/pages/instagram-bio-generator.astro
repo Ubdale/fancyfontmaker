@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+
+// {n} is replaced by the user's name.
+const BIOS = {
+  Attitude: [
+    '👑 {n}\n😎 Born to stand out\n🔥 Living my own rules',
+    '⚡ {n} ⚡\nI am not perfect, I am limited edition 💯',
+    '𝐊𝐢𝐧𝐠 𝐨𝐟 𝐦𝐲 𝐨𝐰𝐧 𝐰𝐨𝐫𝐥𝐝 👑\n{n}\n🚫 No fake friends',
+    '😈 Attitude is my style\n💪 Hard work, no excuses\n— {n}',
+    '🦁 {n}\nSilent but deadly 🤫\nDream big, work hard 💯',
+    '🖤 Too busy working on my own grass to notice yours\n{n}',
+    'Not everyone will like you, and that’s okay 😌\n✦ {n} ✦',
+    '🔥 Savage mode ON\n👑 {n}\n📍 Living rent-free in your mind',
+  ],
+  Cute: [
+    '🌸 {n} 🌸\n✨ Sweet as sugar, cold as ice\n💕 Spread love',
+    '🧸 {n}\n☁️ Head in the clouds\n🍓 Strawberry lover',
+    '♡ {n} ♡\n🦋 Just a girl with big dreams',
+    '🌷 Smile more, worry less\n🎀 {n}\n☕ Coffee & good vibes',
+    '✿ {n} ✿\n🌈 Collecting happy moments',
+    '🐰 Cute but psycho… but cute 💕\n{n}',
+    '🍭 Life is sweet\n🌸 {n}\n💫 Made of stardust',
+    '💖 {n}\n🌼 Kind heart, fierce mind, brave spirit',
+  ],
+  Love: [
+    '❤️ {n}\n💑 Taken by my favourite person',
+    '💞 Loving you is my favourite hobby\n— {n}',
+    '💍 One life, one love\n❤️ {n}',
+    '🌹 In love with life & you\n{n} 💕',
+    '💘 {n}\nHe/She is my today and all of my tomorrows',
+    '♥️ Heart full of love\n🥀 {n}\n✨ Forever & always',
+  ],
+  Aesthetic: [
+    '☾ {n}\n✧ chasing sunsets & dreams',
+    '𝓽𝓱𝓮 𝓫𝓮𝓼𝓽 𝓲𝓼 𝔂𝓮𝓽 𝓽𝓸 𝓬𝓸𝓶𝓮\n✦ {n}',
+    '⋆｡°✩ {n} ✩°｡⋆\nsoft soul, wild heart',
+    '🌙 {n}\n☁️ living in my own little world',
+    '·˚ ༘ {n} ₊˚ˑ༄\nkeep it simple',
+    '🕊️ {n}\nstay humble, stay kind',
+    '🎞️ collecting moments, not things\n— {n}',
+    '✧･ﾟ {n}\n🌊 salty hair, sandy toes',
+  ],
+  Gaming: [
+    '🎮 {n}\n🔥 Free Fire | PUBG | BGMI\n👑 Headshot king',
+    '🎯 Pro player — {n}\n💀 Booyah every day',
+    '⚔️ {n}\n🕹️ Gamer by passion\n📺 Streaming soon',
+    '🏆 {n}\n🎮 Eat. Sleep. Game. Repeat.',
+    '💥 Rush gamer | {n}\n🔫 1v4 clutch master',
+    '👾 {n}\n🎮 Level up your life\n🔴 Live on YouTube',
+  ],
+  Business: [
+    '💼 {n}\n🚀 Entrepreneur | Dreamer | Doer\n📩 DM for collabs',
+    '📈 Helping you grow online\n👤 {n}\n👇 Link below',
+    '✨ {n}\n🛍️ Online store — Order via DM\n🚚 Delivery all over',
+    '🎨 {n} | Creator\n📸 Content & Design\n📧 Business inquiries in DM',
+    '💡 {n}\nBuilding something big 🏗️\n🔗 Check my link',
+  ],
+  Funny: [
+    '😂 {n}\nProfessional overthinker 🧠\nPart-time napper 😴',
+    '🍕 {n}\nI need 6 months vacation, twice a year',
+    '🤡 {n}\nMy bio is loading… ⏳',
+    '😴 {n}\nI followed my heart, it led me to the fridge 🍔',
+    '🙃 {n}\nIf you’re reading this, you owe me a pizza 🍕',
+    '📵 {n}\nNot lazy, just in energy saving mode 🔋',
+  ],
+};
+const categories = Object.keys(BIOS);
+
+const faq = [
+  {
+    q: 'How do I add a bio to Instagram?',
+    a: 'Tap a bio to copy it, open Instagram → Edit profile → Bio, paste it and save. Line breaks are kept.',
+  },
+  {
+    q: 'How long can an Instagram bio be?',
+    a: 'Instagram bios can have up to 150 characters, including emojis and spaces.',
+  },
+  {
+    q: 'Can I use these bios on TikTok or Facebook?',
+    a: 'Yes. The bios work on TikTok, Facebook, Twitter/X, Threads and WhatsApp About too.',
+  },
+];
+---
+
+<Base
+  title="Instagram Bio Generator — Stylish Bio Ideas to Copy"
+  description="Free Instagram bio generator. Copy stylish attitude, cute, love, aesthetic, gaming and business bios with emojis. Add your name and paste."
+  h1="Instagram Bio Generator ✨"
+  intro="Pick a style, add your name and copy a ready-made bio with emojis. Works for Instagram, TikTok and Facebook."
+  faq={faq}
+>
+  <div id="bio-gen" data-bios={JSON.stringify(BIOS)}>
+    <div class="tool-box card">
+      <input class="input" type="text" placeholder="Your name (optional)" maxlength="40" aria-label="Your name" />
+      <div class="tabs" role="tablist">
+        {categories.map((c, i) => <button type="button" class:list={{ active: i === 0 }} data-cat={c}>{c}</button>)}
+      </div>
+    </div>
+    <div class="results"></div>
+  </div>
+
+  <Fragment slot="content">
+    <section class="content">
+      <h2>How to write a good bio</h2>
+      <ul>
+        <li>Say who you are or what you do in the first line.</li>
+        <li>Use 2–4 emojis to break up the text — not too many.</li>
+        <li>Add a call to action like “DM for collabs” or “Link below 👇”.</li>
+        <li>Make your name stand out with <a href="/instagram-fonts/">Instagram fonts</a>.</li>
+      </ul>
+    </section>
+  </Fragment>
+</Base>
+
+<script>
+  const root = document.getElementById('bio-gen');
+  const BIOS = JSON.parse(root.dataset.bios);
+  const input = root.querySelector('input');
+  const list = root.querySelector('.results');
+  let cat = Object.keys(BIOS)[0];
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+  function render() {
+    const name = input.value.trim() || 'Your Name';
+    list.innerHTML = BIOS[cat]
+      .map((t) => {
+        const bio = t.replaceAll('{n}', name);
+        return `<div class="result" data-copy="${esc(bio)}" role="button" tabindex="0">
+          <div class="body"><span class="text" style="white-space:pre-line">${esc(bio)}</span></div>
+          <span class="btn small copy-btn">Copy</span></div>`;
+      })
+      .join('');
+  }
+
+  root.querySelectorAll('.tabs button').forEach((b) =>
+    b.addEventListener('click', () => {
+      root.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('active', x === b));
+      cat = b.dataset.cat;
+      render();
+    }),
+  );
+  input.addEventListener('input', render);
+  render();
+</script>
