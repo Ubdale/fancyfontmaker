@@ -2,6 +2,9 @@
 // The main tool: type text, get a list of fancy styles, tap one to copy.
 // mode="fonts": plain font styles first, then decorated ones.
 // mode="names": decorated gaming-name styles first (Free Fire, PUBG...).
+// The 300x250 banner sits after the first few styles, where visitors actually look.
+import AdSlot from './AdSlot.astro';
+
 interface Props {
   mode?: 'fonts' | 'names';
   placeholder?: string;
@@ -20,7 +23,9 @@ const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy 
       <span class="muted" style="font-size:.85rem">Tap any style to copy</span>
     </div>
   </div>
-  <div class="results" aria-live="polite"></div>
+  <div class="results results-top" aria-live="polite"></div>
+  <AdSlot slot="banner300x250" />
+  <div class="results results-rest"></div>
 </div>
 
 <script>
@@ -36,9 +41,13 @@ const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy 
       'Greek Style', 'Wide', 'Black Bubble', 'Bubble'].includes(s.name),
   );
 
+  // How many styles appear above the in-list ad.
+  const TOP_COUNT = 8;
+
   for (const root of document.querySelectorAll('.font-gen')) {
     const input = root.querySelector('input');
-    const list = root.querySelector('.results');
+    const listTop = root.querySelector('.results-top');
+    const listRest = root.querySelector('.results-rest');
     const mode = root.dataset.mode;
     const sample = root.dataset.sample;
     let seed = 0;
@@ -56,14 +65,14 @@ const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy 
 
     function render() {
       const text = input.value.trim() || sample;
-      list.innerHTML = build(text)
-        .map(
-          (r) => `<div class="result" data-copy="${escapeHtml(r.value)}" role="button" tabindex="0">
-            <div class="body"><span class="label">${escapeHtml(r.label)}</span><span class="text">${escapeHtml(r.value)}</span></div>
-            <span class="btn small copy-btn">Copy</span>
-          </div>`,
-        )
-        .join('');
+      const html = build(text).map(
+        (r) => `<div class="result" data-copy="${escapeHtml(r.value)}" role="button" tabindex="0">
+          <div class="body"><span class="label">${escapeHtml(r.label)}</span><span class="text">${escapeHtml(r.value)}</span></div>
+          <span class="btn small copy-btn">Copy</span>
+        </div>`,
+      );
+      listTop.innerHTML = html.slice(0, TOP_COUNT).join('');
+      listRest.innerHTML = html.slice(TOP_COUNT).join('');
     }
 
     input.addEventListener('input', render);
@@ -76,7 +85,7 @@ const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy 
       input.focus();
       render();
     });
-    list.addEventListener('keydown', (e) => {
+    root.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && e.target.matches('.result')) e.target.click();
     });
 

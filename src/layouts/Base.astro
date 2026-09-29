@@ -11,9 +11,11 @@ interface Props {
   h1?: string;
   intro?: string;
   faq?: { q: string; a: string }[];
+  // Pages that place the 300x250 banner inside their tool (FontGenerator) turn this off.
+  bottomBanner?: boolean;
 }
 
-const { title, description, h1, intro, faq = [] } = Astro.props;
+const { title, description, h1, intro, faq = [], bottomBanner = true } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const fullTitle = Astro.url.pathname === '/' ? title : `${title} | ${SITE.name}`;
 const path = Astro.url.pathname;
@@ -90,7 +92,7 @@ const jsonLd = [
 
       <slot name="content" />
 
-      <AdSlot slot="banner300x250" />
+      {bottomBanner && <AdSlot slot="banner300x250" />}
 
       {faq.length > 0 && (
         <section class="content faq">
