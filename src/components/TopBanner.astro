@@ -1,0 +1,17 @@
+---
+// Top-of-page banner: loads ONLY the size that fits the screen (728x90 desktop, 320x50 mobile),
+// so no hidden ad is ever loaded. Written in place while the page parses, like the banner codes expect.
+import { ADS } from '../../site.config.mjs';
+
+const desktop = ADS.banner728x90.trim();
+const mobile = ADS.banner320x50.trim();
+// Escape "</" so the ad code can sit inside a JS string in an inline <script>.
+const toJs = (s: string) => JSON.stringify(s).replace(/<\//g, '<\\/');
+const script = `document.write(window.matchMedia('(min-width: 761px)').matches ? ${toJs(desktop)} : ${toJs(mobile)});`;
+---
+
+{(desktop || mobile) && (
+  <div class="ad top-ad">
+    <script is:inline set:html={script} />
+  </div>
+)}

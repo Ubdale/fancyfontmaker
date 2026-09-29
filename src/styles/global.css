@@ -165,11 +165,6 @@ textarea.input { min-height: 140px; resize: vertical; }
 /* Ads */
 .ad { display: flex; justify-content: center; margin: 16px auto; max-width: 100%; overflow: hidden; }
 .top-ad { margin-top: 12px; }
-.mobile-only { display: none; }
-@media (max-width: 760px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: flex; }
-}
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--border); background: var(--card); padding: 18px 0; text-align: center; font-size: 0.9rem; }

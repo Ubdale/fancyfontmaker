@@ -2,6 +2,7 @@
 import { SITE, ADS } from '../../site.config.mjs';
 import { TOOLS } from '../data/nav.js';
 import AdSlot from '../components/AdSlot.astro';
+import TopBanner from '../components/TopBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -74,8 +75,7 @@ const jsonLd = [
     </header>
 
     <main class="wrap">
-      <AdSlot slot="banner728x90" class="desktop-only top-ad" />
-      <AdSlot slot="banner320x50" class="mobile-only top-ad" />
+      <TopBanner />
 
       {h1 && (
         <section class="hero">
