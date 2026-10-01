@@ -3,15 +3,15 @@
 // ============================================================
 
 export const SITE = {
-  name: 'FancyFontMaker',
-  url: 'https://fancyfontmaker.site', // your domain, no trailing slash
+  name: 'FancyFont',
+  url: 'https://fancyfont.online', // your domain, no trailing slash
   tagline: 'Fancy fonts, stylish names & free text tools',
-  email: 'contact@fancyfontmaker.site', // shown on the Contact page
+  email: 'contact@fancyfont.online', // shown on the Contact page
 };
 
 // ============================================================
 //  ADSTERRA ADS
-//  1. Log in to Adsterra (publisher) -> Websites -> add fancyfontmaker.site
+//  1. Log in to Adsterra (publisher) -> Websites -> add fancyfont.online
 //  2. Create each ad unit, click "Get code", and paste the WHOLE code
 //     between the backticks below.
 //  3. Leave a slot as `` (empty) to turn it off.

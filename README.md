@@ -1,6 +1,6 @@
-# FancyFontMaker
+# FancyFont
 
-Free fancy fonts & text tools site (fancyfontmaker.site), built with Astro, hosted on Cloudflare Pages, monetised with Adsterra.
+Free fancy fonts & text tools site (fancyfont.online), built with Astro, hosted on Cloudflare Workers, monetised with Adsterra.
 
 ## Run locally
 
@@ -10,27 +10,23 @@ npm run dev      # http://localhost:4321
 npm run build    # outputs to dist/
 ```
 
-## Deploy to Cloudflare Pages
+## Deployment
 
-1. Push this folder to a new GitHub repository.
-2. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git** → pick the repo.
-3. Build settings:
-   - Framework preset: **Astro**
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-4. Deploy. You get a `*.pages.dev` address.
-5. In the Pages project → **Custom domains** → add `fancyfontmaker.site` (and `www.fancyfontmaker.site`).
+Pushes to `main` on GitHub (github.com/Ubdale/fancyfontmaker) auto-deploy to the Cloudflare Worker `fancyfontmaker`.
+
+- Build command: `npm run build`, output directory: `dist`
+- Custom domain: Worker → **Settings** → **Domains & Routes** → add `fancyfont.online` and `www.fancyfont.online`.
 
 ## Add Adsterra ads
 
-1. Sign up at adsterra.com as a **Publisher** and add `https://fancyfontmaker.site`.
+1. Sign up at adsterra.com as a **Publisher** and add `https://fancyfont.online`.
 2. Create ad units: Popunder, Social Bar, Native Banner, Banner 300x250, 728x90, 320x50.
 3. Paste each unit's code into `site.config.mjs` under `ADS`.
 4. Commit and push — Cloudflare redeploys automatically.
 
 ## After launch
 
-- Google Search Console → add the domain → submit `https://fancyfontmaker.site/sitemap-index.xml`.
+- Google Search Console → add the domain → submit `https://fancyfont.online/sitemap-index.xml`.
 - Change the contact email in `site.config.mjs` if needed.
 
 ## Pages
