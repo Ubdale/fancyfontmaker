@@ -1,0 +1,10 @@
+# Old URLs from the domain's previous site -> matching pages here (permanent redirects keep their ranking value).
+/conditions                                    /terms/   301
+/conditions/                                   /terms/   301
+/signature-generator                           /         301
+/signature-generator/                          /         301
+/posts                                         /         301
+/posts/*                                       /         301
+/tags/*                                        /         301
+/top-10-uses-for-fancy-text-in-social-media    /         301
+/top-10-uses-for-fancy-text-in-social-media/   /         301
