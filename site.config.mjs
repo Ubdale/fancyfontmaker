@@ -10,57 +10,45 @@ export const SITE = {
 };
 
 // ============================================================
-//  ADSTERRA ADS
-//  1. Log in to Adsterra (publisher) -> Websites -> add fancyfont.online
-//  2. Create each ad unit, click "Get code", and paste the WHOLE code
-//     between the backticks below.
-//  3. Leave a slot as `` (empty) to turn it off.
+//  MONETAG ADS (active network)
+//  Paste each zone's code from Monetag -> Websites -> fancyfont.online -> Get tag.
+//  These load on every page. Leave a slot as `` (empty) to turn it off.
+//  Don't add Push Notifications or Multitag: they show an "Allow notifications?" prompt.
+// ============================================================
+
+export const MONETAG = {
+  // Onclick (Popunder) — main earner.
+  onclick: `<script>(function(s){s.dataset.zone='11935489',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
+
+  // In-Page Push (Banner) — small ad that slides in over the page.
+  inPagePush: `<script>(function(s){s.dataset.zone='11935492',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
+
+  // Vignette Banner — full-screen ad shown between page views.
+  vignette: `<script>(function(s){s.dataset.zone='11935495',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
+};
+
+// ============================================================
+//  ADSTERRA ADS (currently OFF — switched to Monetag for Payoneer payouts)
+//  Run only one popunder network at a time. To use Adsterra again, get each
+//  unit's code for fancyfont.online and paste it between the backticks.
 // ============================================================
 
 export const ADS = {
-  // Popunder — loads once in <head> on every page. Highest earner.
-  popunder: `<script src="https://pl31606425.profitableratecpmnetwork.com/11/04/0f/11040fb8a407b2fa41d7a434bdb3ab4e.js"></script>`,
+  // Popunder — loads once in <head> on every page.
+  popunder: ``,
 
   // Social Bar — loads at the end of <body> on every page.
-  socialBar: `<script src="https://pl31606426.profitableratecpmnetwork.com/26/0f/ad/260fad6c65faeedc0fb4d98238dd0cd5.js"></script>`,
+  socialBar: ``,
 
   // Native Banner — shown under each tool.
-  native: `<script async="async" data-cfasync="false" src="https://pl31606427.profitableratecpmnetwork.com/96142691e12d4d682eaf10db395f6107/invoke.js"></script>
-<div id="container-96142691e12d4d682eaf10db395f6107"></div>`,
+  native: ``,
 
-  // Banner 300x250 — shown inside the page content.
-  banner300x250: `<script>
-  atOptions = {
-    'key' : 'b9a218e78a9c1c335c2fe7cf4c023ab2',
-    'format' : 'iframe',
-    'height' : 250,
-    'width' : 300,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/b9a218e78a9c1c335c2fe7cf4c023ab2/invoke.js"></script>`,
+  // Banner 300x250 — after the first font styles on font pages, at the bottom elsewhere.
+  banner300x250: ``,
 
   // Banner 728x90 — top of pages, desktop only (only one of the two top banners loads).
-  banner728x90: `<script>
-  atOptions = {
-    'key' : 'f8be0274b2d2a41fc29fea337113b795',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/f8be0274b2d2a41fc29fea337113b795/invoke.js"></script>`,
+  banner728x90: ``,
 
   // Banner 320x50 — top of pages, mobile only.
-  banner320x50: `<script>
-  atOptions = {
-    'key' : '080fc470467c156f526ec897ceefc9b3',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/080fc470467c156f526ec897ceefc9b3/invoke.js"></script>`,
+  banner320x50: ``,
 };

@@ -1,5 +1,5 @@
 ---
-import { SITE, ADS } from '../../site.config.mjs';
+import { SITE, ADS, MONETAG } from '../../site.config.mjs';
 import { TOOLS } from '../data/nav.js';
 import AdSlot from '../components/AdSlot.astro';
 import TopBanner from '../components/TopBanner.astro';
@@ -61,6 +61,7 @@ const jsonLd = [
     <meta name="twitter:card" content="summary" />
     {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
     {ADS.popunder.trim() && <Fragment set:html={ADS.popunder} />}
+    {Object.values(MONETAG).filter((code) => code.trim()).map((code) => <Fragment set:html={code} />)}
   </head>
   <body>
     <header class="site-header">
