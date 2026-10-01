@@ -19,48 +19,48 @@ export const SITE = {
 
 export const ADS = {
   // Popunder — loads once in <head> on every page. Highest earner.
-  popunder: `<script src="https://pl31578291.profitableratecpmnetwork.com/a1/81/08/a181081563cbdc30e75567dac29fc4fb.js"></script>`,
+  popunder: `<script src="https://pl31606425.profitableratecpmnetwork.com/11/04/0f/11040fb8a407b2fa41d7a434bdb3ab4e.js"></script>`,
 
   // Social Bar — loads at the end of <body> on every page.
-  socialBar: `<script src="https://pl31578292.profitableratecpmnetwork.com/bd/15/cc/bd15cc3e43f1c01aee4e8a45d5fa5fd7.js"></script>`,
+  socialBar: `<script src="https://pl31606426.profitableratecpmnetwork.com/26/0f/ad/260fad6c65faeedc0fb4d98238dd0cd5.js"></script>`,
 
   // Native Banner — shown under each tool.
-  native: `<script async="async" data-cfasync="false" src="https://pl31578293.profitableratecpmnetwork.com/80a3801ff602df7ca757ac4fd2b99e5d/invoke.js"></script>
-<div id="container-80a3801ff602df7ca757ac4fd2b99e5d"></div>`,
+  native: `<script async="async" data-cfasync="false" src="https://pl31606427.profitableratecpmnetwork.com/96142691e12d4d682eaf10db395f6107/invoke.js"></script>
+<div id="container-96142691e12d4d682eaf10db395f6107"></div>`,
 
   // Banner 300x250 — shown inside the page content.
   banner300x250: `<script>
   atOptions = {
-    'key' : '87e911d7d9440d38e701bbcee9e190c0',
+    'key' : 'b9a218e78a9c1c335c2fe7cf4c023ab2',
     'format' : 'iframe',
     'height' : 250,
     'width' : 300,
     'params' : {}
   };
 </script>
-<script src="https://www.highrevenueformat.com/87e911d7d9440d38e701bbcee9e190c0/invoke.js"></script>`,
+<script src="https://www.highrevenueformat.com/b9a218e78a9c1c335c2fe7cf4c023ab2/invoke.js"></script>`,
 
   // Banner 728x90 — top of pages, desktop only (only one of the two top banners loads).
   banner728x90: `<script>
   atOptions = {
-    'key' : 'a1d8c10ae3970ecbc01bca7fb1fbeeaf',
+    'key' : 'f8be0274b2d2a41fc29fea337113b795',
     'format' : 'iframe',
     'height' : 90,
     'width' : 728,
     'params' : {}
   };
 </script>
-<script src="https://www.highrevenueformat.com/a1d8c10ae3970ecbc01bca7fb1fbeeaf/invoke.js"></script>`,
+<script src="https://www.highrevenueformat.com/f8be0274b2d2a41fc29fea337113b795/invoke.js"></script>`,
 
   // Banner 320x50 — top of pages, mobile only.
   banner320x50: `<script>
   atOptions = {
-    'key' : 'e2dadd94d447c023d2891a19caaf791d',
+    'key' : '080fc470467c156f526ec897ceefc9b3',
     'format' : 'iframe',
     'height' : 50,
     'width' : 320,
     'params' : {}
   };
 </script>
-<script src="https://www.highrevenueformat.com/e2dadd94d447c023d2891a19caaf791d/invoke.js"></script>`,
+<script src="https://www.highrevenueformat.com/080fc470467c156f526ec897ceefc9b3/invoke.js"></script>`,
 };
