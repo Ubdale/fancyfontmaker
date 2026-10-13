@@ -1,6 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import FontGenerator from '../components/FontGenerator.astro';
+import CopyExamples from '../components/CopyExamples.astro';
+const examples = [
+  { label: 'General channel', value: '「💬」ɢᴇɴᴇʀᴀʟ' },
+  { label: 'Announcements channel', value: '📢・𝐚𝐧𝐧𝐨𝐮𝐧𝐜𝐞𝐦𝐞𝐧𝐭𝐬' },
+  { label: 'Gaming channel', value: '🎮・ɢᴀᴍɪɴɢ' },
+  { label: 'Display name', value: '✦ 𝓐𝓵𝓮𝔁 ✦' },
+];
 
 const faq = [
   {
@@ -19,7 +26,7 @@ const faq = [
 ---
 
 <Base
-  title="Discord Fonts 𝕮𝖔𝖕𝖞 & 𝕻𝖆𝖘𝖙𝖊 — Fancy Text for Discord"
+  title="Discord Font Generator — Copy and Paste Names & Text"
   description="Discord fonts generator. Copy and paste fancy fonts for your Discord nickname, server name, channel names and messages. Free."
   h1="Discord Fonts 𝕮𝖔𝖕𝖞 & 𝕻𝖆𝖘𝖙𝖊"
   intro="Style your Discord nickname, server and channels with fancy Unicode fonts. Tap any style to copy."
@@ -30,6 +37,13 @@ const faq = [
 
   <Fragment slot="content">
     <section class="content">
+      <CopyExamples title="Discord channel names to copy and paste" examples={examples} />
+      <h2>Unicode text or Discord markdown?</h2>
+      <p>For messages, Discord formatting such as **bold** uses ordinary letters and is easy to edit.
+        For a decorated nickname or channel label, this generator creates Unicode characters that you can copy.
+        Preview names in Discord, since spaces and character support may vary by field.</p>
+      <p>Keep channel names recognisable so members can find announcements and help.
+        Use decoration around a short label rather than replacing every letter of an important instruction.</p>
       <h2>Fonts for Discord servers</h2>
       <p>
         Server owners use fancy fonts to make channel lists look clean and organised, for example

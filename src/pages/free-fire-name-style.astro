@@ -1,6 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import FontGenerator from '../components/FontGenerator.astro';
+import CopyExamples from '../components/CopyExamples.astro';
+const examples = [
+  { label: 'Crown name', value: '♛Ghost♛' },
+  { label: 'Star name', value: '★Viper★' },
+  { label: 'Bracket name', value: '꧁Alex꧂' },
+  { label: 'Clan-style name', value: '亗Nova亗' },
+];
 
 const faq = [
   {
@@ -30,6 +37,14 @@ const faq = [
 
   <Fragment slot="content">
     <section class="content">
+      <CopyExamples title="Short Free Fire name ideas to copy" examples={examples} />
+      <p>These are starting ideas, not reserved or guaranteed available names. Replace the word with
+        your nickname and preview it in the game before spending on a name change.</p>
+      <h2>Build a name with your own symbols</h2>
+      <p>Start with a short base name, choose a readable font, then add one pair of brackets or stars.
+        Use the Gaming names filter for decorated results. If a style is rejected, simplify it by
+        removing decorations or choosing ordinary letters. More options are in our
+        <a href="/symbols/">gaming symbols collection</a>.</p>
       <h2>Stylish Free Fire names</h2>
       <p>
         A stylish Free Fire name makes you stand out in the lobby and the kill feed. Players love

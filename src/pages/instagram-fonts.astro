@@ -1,6 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import FontGenerator from '../components/FontGenerator.astro';
+import CopyExamples from '../components/CopyExamples.astro';
+const examples = [
+  { label: 'Cursive bio', value: '𝓒𝓸𝓵𝓵𝓮𝓬𝓽𝓲𝓷𝓰 𝓶𝓸𝓶𝓮𝓷𝓽𝓼' },
+  { label: 'Minimal bio', value: 'ᴍᴀᴋᴇ ꜱᴏᴍᴇᴛʜɪɴɢ ɢᴏᴏᴅ' },
+  { label: 'Bold display name', value: '𝐀𝐥𝐞𝐱' },
+  { label: 'Bio with symbols', value: '✦ coffee • photos • little adventures ✦' },
+];
 
 const faq = [
   {
@@ -19,8 +26,8 @@ const faq = [
 ---
 
 <Base
-  title="Instagram Fonts 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮 — Cool Fonts for IG Bio"
-  description="Free Instagram fonts generator. Copy and paste cool, cute and aesthetic fonts for your Instagram bio, name, captions and stories."
+  title="Instagram Font Generator — Copy and Paste Bio Fonts"
+  description="Create Instagram bio fonts online: cursive, bold, small caps and aesthetic styles. Type your name, choose a font and copy it. Free, no download or sign-up."
   h1="Instagram Fonts 𝓒𝓸𝓹𝔂 & 𝓟𝓪𝓼𝓽𝓮"
   intro="Make your Instagram bio and name stand out with cute, aesthetic and cool fonts. Type below and tap to copy."
   faq={faq}
@@ -30,9 +37,17 @@ const faq = [
 
   <Fragment slot="content">
     <section class="content">
+      <CopyExamples title="Instagram bio fonts to copy and paste" examples={examples} />
+      <h2>How to put a fancy font in your Instagram bio</h2>
+      <ol>
+        <li>Type a short name or bio line into the generator.</li>
+        <li>Use the Cursive, Bold or Aesthetic filter to find a style.</li>
+        <li>Tap a result to copy it, then paste it into your profile bio or display name.</li>
+        <li>Check how it looks before saving. Keep contact details and important words in plain text.</li>
+      </ol>
       <h2>Best fonts for Instagram</h2>
       <p>
-        The most popular Instagram fonts are <b>Script</b> (𝓵𝓲𝓴𝓮 𝓽𝓱𝓲𝓼) for a cute, aesthetic look,
+        Try <b>Script</b> (𝓵𝓲𝓴𝓮 𝓽𝓱𝓲𝓼) for a cute, aesthetic look,
         <b>Bold</b> (𝐥𝐢𝐤𝐞 𝐭𝐡𝐢𝐬) for headings, <b>Small Caps</b> (ʟɪᴋᴇ ᴛʜɪꜱ) for a clean minimal
         style, and <b>Aesthetic</b> (ｌｉｋｅ ｔｈｉｓ) for vaporwave vibes.
       </p>

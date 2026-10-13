@@ -115,6 +115,7 @@ textarea.input { min-height: 140px; resize: vertical; }
   border: 1px solid var(--border); background: var(--card); color: var(--muted);
 }
 .tabs button.active { color: #fff; background: var(--primary); border-color: var(--primary); }
+.style-filters[hidden] { display: none; }
 
 /* Symbols grid */
 .sym-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: 6px; }

@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  examples: { label: string; value: string }[];
+}
+const { title, examples } = Astro.props;
+---
+<h2>{title}</h2>
+<p>Tap an example to copy it, or use the generator above to style your own words.</p>
+<div class="results">
+  {examples.map((example) => (
+    <button type="button" class="result example-copy" data-copy={example.value}>
+      <span class="body"><span class="label">{example.label}</span><span class="text">{example.value}</span></span>
+      <span class="btn small copy-btn">Copy</span>
+    </button>
+  ))}
+</div>
+<style>
+  .example-copy { font: inherit; color: var(--text); text-align: left; width: 100%; }
+</style>

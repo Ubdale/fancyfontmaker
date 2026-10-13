@@ -2,6 +2,22 @@
 
 Free fancy fonts & text tools site (fancyfont.online), built with Astro, hosted on Cloudflare Workers, monetised with Monetag (Adsterra slots kept but turned off).
 
+**[Try FancyFont online](https://fancyfont.online/?utm_source=github&utm_medium=referral&utm_campaign=readme)** — type your name, choose a style, and copy it. No account or download required.
+
+`Alex` → `𝐀𝐥𝐞𝐱` → `𝓐𝓵𝓮𝔁` → `Ⓐⓛⓔⓧ` → `꧁𝐀𝐥𝐞𝐱꧂`
+
+Choose All styles, Bold, Cursive, Aesthetic or Gaming names to narrow the results.
+
+| What do you want to make? | Try the tool |
+|---|---|
+| An Instagram bio or display name | [Instagram fonts](https://fancyfont.online/instagram-fonts/?utm_source=github&utm_medium=referral&utm_campaign=readme) |
+| A TikTok bio or caption | [TikTok fonts](https://fancyfont.online/tiktok-fonts/?utm_source=github&utm_medium=referral&utm_campaign=readme) |
+| Discord channel labels or nicknames | [Discord fonts](https://fancyfont.online/discord-fonts/?utm_source=github&utm_medium=referral&utm_campaign=readme) |
+| A decorated gaming nickname | [Free Fire names](https://fancyfont.online/free-fire-name-style/?utm_source=github&utm_medium=referral&utm_campaign=readme) |
+| Hearts, stars or brackets | [Copy-and-paste symbols](https://fancyfont.online/symbols/?utm_source=github&utm_medium=referral&utm_campaign=readme) |
+
+Generated styles are Unicode characters. Preview them in the destination app because character support varies.
+
 ## Run locally
 
 ```bash

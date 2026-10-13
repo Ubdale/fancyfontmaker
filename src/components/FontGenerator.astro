@@ -5,6 +5,7 @@
 // The 300x250 banner sits after the first few styles, where visitors actually look.
 import AdSlot from './AdSlot.astro';
 import { STYLES, DECORATIONS, decorate } from '../lib/fonts.js';
+import { STYLE_CATEGORIES } from '../lib/style-categories.js';
 
 interface Props {
   mode?: 'fonts' | 'names';
@@ -35,6 +36,11 @@ const initialStyles = mode === 'names'
       <span class="muted" style="font-size:.85rem">Tap any style to copy</span>
     </div>
   </div>
+  <div class="tabs style-filters" role="group" aria-label="Filter font styles" hidden>
+    {STYLE_CATEGORIES.map((category) => (
+      <button type="button" data-category={category.id} aria-pressed={category.id === 'all'} class:list={{ active: category.id === 'all' }}>{category.label}</button>
+    ))}
+  </div>
   <div class="results results-top" aria-live="polite">
     {initialStyles.map((style) => (
       <div class="result" data-copy={style.value} role="button" tabindex="0">
@@ -50,6 +56,7 @@ const initialStyles = mode === 'names'
 
 <script>
   import { STYLES, DECORATIONS, decorate } from '../lib/fonts.js';
+  import { matchesCategory } from '../lib/style-categories.js';
 
   const escapeHtml = (s) =>
     s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -71,21 +78,24 @@ const initialStyles = mode === 'names'
     const mode = root.dataset.mode;
     const sample = root.dataset.sample;
     let seed = 0;
+    let category = 'all';
+    const filters = root.querySelector('.style-filters');
+    filters.hidden = false;
 
     const pickStyle = (i) => NAME_STYLES[(i * 7 + seed) % NAME_STYLES.length];
 
     function build(text) {
-      const plain = STYLES.map((s) => ({ label: s.name, value: s.fn(text) }));
+      const plain = STYLES.map((s) => ({ label: s.name, value: s.fn(text), decorated: false }));
       const decorated = DECORATIONS.map((d, i) => {
         const s = pickStyle(i);
-        return { label: `${s.name} + decoration`, value: decorate(s.fn(text), d) };
+        return { label: `${s.name} + decoration`, value: decorate(s.fn(text), d), decorated: true };
       });
       return mode === 'names' ? [...decorated, ...plain] : [...plain, ...decorated];
     }
 
     function render() {
       const text = input.value.trim() || sample;
-      const html = build(text).map(
+      const html = build(text).filter((result) => matchesCategory(result, category)).map(
         (r) => `<div class="result" data-copy="${escapeHtml(r.value)}" role="button" tabindex="0">
           <div class="body"><span class="label">${escapeHtml(r.label)}</span><span class="text">${escapeHtml(r.value)}</span></div>
           <span class="btn small copy-btn">Copy</span>
@@ -96,6 +106,17 @@ const initialStyles = mode === 'names'
     }
 
     input.addEventListener('input', render);
+    filters.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-category]');
+      if (!button) return;
+      category = button.dataset.category;
+      for (const option of filters.querySelectorAll('button')) {
+        const selected = option === button;
+        option.classList.toggle('active', selected);
+        option.setAttribute('aria-pressed', String(selected));
+      }
+      render();
+    });
     root.querySelector('.shuffle').addEventListener('click', () => {
       seed = Math.floor(Math.random() * 1000);
       render();
@@ -106,7 +127,10 @@ const initialStyles = mode === 'names'
       render();
     });
     root.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && e.target.matches('.result')) e.target.click();
+      if (['Enter', ' '].includes(e.key) && e.target.matches('.result')) {
+        e.preventDefault();
+        e.target.click();
+      }
     });
 
     render();
