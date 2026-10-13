@@ -35,7 +35,7 @@ Pushes to `main` on GitHub (github.com/Ubdale/fancyfontmaker) auto-deploy to the
 
 ## Ads
 
-Monetag is the active network. Its zones (Onclick, In-Page Push, Vignette) are in `MONETAG` in `site.config.mjs`; the site is verified with `public/sw.js`. Don't add Monetag's Push Notifications or Multitag zones (permission prompt), and don't run two popunder networks at once.
+Monetag is the active network. Its zones are in `MONETAG` in `site.config.mjs`; the site is verified with `public/sw.js`. In-Page Push and Vignette are enabled. Onclick is disabled after a live usability check found a transparent ad overlay intercepting tool clicks; retest the format before re-enabling it. Don't add Monetag's Push Notifications or Multitag zones (permission prompt), and don't run two popunder networks at once.
 
 To switch back to Adsterra, empty the `MONETAG` slots and:
 

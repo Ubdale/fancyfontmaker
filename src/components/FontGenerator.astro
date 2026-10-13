@@ -109,7 +109,6 @@ const initialStyles = mode === 'names'
     const selectCategory = (event) => {
       const button = event.target.closest('[data-category]');
       if (!button) return;
-      if (event.type === 'pointerdown' && event.button !== 0) return;
       if (category === button.dataset.category) return;
       category = button.dataset.category;
       for (const option of filters.querySelectorAll('button')) {
@@ -119,7 +118,6 @@ const initialStyles = mode === 'names'
       }
       render();
     };
-    filters.addEventListener('pointerdown', selectCategory);
     filters.addEventListener('click', selectCategory);
     root.querySelector('.shuffle').addEventListener('click', () => {
       seed = Math.floor(Math.random() * 1000);

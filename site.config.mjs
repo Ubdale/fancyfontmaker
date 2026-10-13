@@ -17,8 +17,9 @@ export const SITE = {
 // ============================================================
 
 export const MONETAG = {
-  // Onclick (Popunder) — main earner.
-  onclick: `<script>(function(s){s.dataset.zone='11935489',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
+  // Disabled after live verification found a transparent overlay intercepting tool clicks.
+  // Zone 11935489 can be retested separately before re-enabling this format.
+  onclick: ``,
 
   // In-Page Push (Banner) — small ad that slides in over the page.
   inPagePush: `<script>(function(s){s.dataset.zone='11935492',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`,
