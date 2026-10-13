@@ -1,0 +1,25 @@
+---
+import { SITE } from '../../site.config.mjs';
+const { title, canonical } = Astro.props;
+const sharedUrl = new URL(canonical);
+sharedUrl.searchParams.set('utm_source', 'visitor_share');
+sharedUrl.searchParams.set('utm_medium', 'referral');
+sharedUrl.searchParams.set('utm_campaign', 'share_tool');
+const url = sharedUrl.href;
+const text = `${title} — free on ${SITE.name}`;
+---
+
+<section class="card share-tool" aria-label="Share this tool">
+  <strong>Know someone who would use this?</strong>
+  <p class="muted">Share this free tool with a friend.</p>
+  <div class="row">
+    <button class="btn secondary small" type="button" data-copy={url}>Copy tool link</button>
+    <a class="btn secondary small" href={`https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    <a class="btn secondary small" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} target="_blank" rel="noopener noreferrer">Facebook</a>
+  </div>
+</section>
+
+<style>
+  .share-tool { margin-top: 24px; }
+  .share-tool p { margin: 4px 0 12px; }
+</style>

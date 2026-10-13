@@ -4,6 +4,7 @@
 // mode="names": decorated gaming-name styles first (Free Fire, PUBG...).
 // The 300x250 banner sits after the first few styles, where visitors actually look.
 import AdSlot from './AdSlot.astro';
+import { STYLES, DECORATIONS, decorate } from '../lib/fonts.js';
 
 interface Props {
   mode?: 'fonts' | 'names';
@@ -12,6 +13,17 @@ interface Props {
 }
 
 const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy Font' } = Astro.props;
+const nameStyles = STYLES.filter((s) =>
+  ['Bold', 'Bold Script', 'Script', 'Bold Gothic', 'Gothic', 'Double Struck', 'Small Caps',
+    'Sans Bold', 'Bold Italic', 'Monospace', 'Thai Style', 'Magic', 'Russian Style', 'Tiny',
+    'Greek Style', 'Wide', 'Black Bubble', 'Bubble'].includes(s.name),
+);
+const initialStyles = mode === 'names'
+  ? DECORATIONS.slice(0, 8).map((d, i) => {
+      const style = nameStyles[(i * 7) % nameStyles.length];
+      return { label: `${style.name} + decoration`, value: decorate(style.fn(sample), d) };
+    })
+  : STYLES.slice(0, 8).map((style) => ({ label: style.name, value: style.fn(sample) }));
 ---
 
 <div class="font-gen" data-mode={mode} data-sample={sample}>
@@ -23,7 +35,15 @@ const { mode = 'fonts', placeholder = 'Type your text here…', sample = 'Fancy 
       <span class="muted" style="font-size:.85rem">Tap any style to copy</span>
     </div>
   </div>
-  <div class="results results-top" aria-live="polite"></div>
+  <div class="results results-top" aria-live="polite">
+    {initialStyles.map((style) => (
+      <div class="result" data-copy={style.value} role="button" tabindex="0">
+        <div class="body"><span class="label">{style.label}</span><span class="text">{style.value}</span></div>
+        <span class="btn small copy-btn">Copy</span>
+      </div>
+    ))}
+  </div>
+  <noscript><p>Enable JavaScript to generate styles from your own text and copy them with a tap. You can select and copy these examples manually.</p></noscript>
   <AdSlot slot="banner300x250" />
   <div class="results results-rest"></div>
 </div>

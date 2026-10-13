@@ -3,6 +3,7 @@ import { SITE, ADS, MONETAG } from '../../site.config.mjs';
 import { TOOLS } from '../data/nav.js';
 import AdSlot from '../components/AdSlot.astro';
 import TopBanner from '../components/TopBanner.astro';
+import ShareTool from '../components/ShareTool.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -92,6 +93,8 @@ const jsonLd = [
       <AdSlot slot="native" />
 
       <slot name="content" />
+
+      <ShareTool title={h1 ?? title} canonical={canonical} />
 
       {bottomBanner && <AdSlot slot="banner300x250" />}
 
