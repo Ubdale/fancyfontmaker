@@ -1,6 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import FontGenerator from '../components/FontGenerator.astro';
+import { STYLES } from '../lib/fonts.js';
+
+const examples = [
+  { style: 'Bold Script', text: 'Daily moments', label: 'Cursive bio' },
+  { style: 'Small Caps', text: 'create something new', label: 'Small caps bio' },
+  { style: 'Bold', text: 'Alex', label: 'Bold display name' },
+  { style: 'Bubble', text: 'good vibes', label: 'Bubble text' },
+].map((example) => ({ ...example, value: STYLES.find((style) => style.name === example.style).fn(example.text) }));
 
 const faq = [
   {
@@ -13,14 +21,18 @@ const faq = [
   },
   {
     q: 'Do fonts work in TikTok captions?',
-    a: 'Yes, they work in captions, comments and your bio.',
+    a: 'You can paste the generated Unicode text into captions, comments and your bio. Preview the result before posting: support for individual characters can vary by device and app version.',
+  },
+  {
+    q: 'Why does my TikTok font look different after pasting?',
+    a: 'This tool creates Unicode characters, not an installed font. TikTok and your device choose how each character is displayed. Try a simpler style if you see boxes or missing letters.',
   },
 ];
 ---
 
 <Base
-  title="TikTok Fonts 𝒞𝑜𝓅𝓎 & 𝒫𝒶𝓈𝓉𝑒 — Cool Fonts for TikTok Bio"
-  description="TikTok fonts generator. Copy and paste cool, aesthetic fonts for your TikTok name, bio, captions and comments. Free and instant."
+  title="TikTok Font Generator Online — Copy and Paste Fonts"
+  description="Type your TikTok name or bio and copy stylish fonts instantly. Try cursive, bold, small caps and aesthetic text online. Free, no download or sign-up."
   h1="TikTok Fonts 𝒞𝑜𝓅𝓎 & 𝒫𝒶𝓈𝓉𝑒"
   intro="Get aesthetic and cool fonts for your TikTok name, bio and captions. Tap any style to copy it."
   faq={faq}
@@ -30,12 +42,34 @@ const faq = [
 
   <Fragment slot="content">
     <section class="content">
+      <h2>Copy and paste TikTok font examples</h2>
+      <p>Try one of these short examples, or enter your own words in the generator above.</p>
+      <div class="results">
+        {examples.map((example) => (
+          <button type="button" class="result" data-copy={example.value} style="font:inherit;color:var(--text);text-align:left;width:100%">
+            <span class="body"><span class="label">{example.label}</span><span class="text">{example.value}</span></span>
+            <span class="btn small copy-btn">Copy</span>
+          </button>
+        ))}
+      </div>
+      <h2>How to use this online TikTok font generator</h2>
+      <ol>
+        <li>Type your display name or a short bio line in the text box.</li>
+        <li>Choose a readable style and tap it to copy the text.</li>
+        <li>Open your TikTok profile and paste it into the field you want to edit.</li>
+        <li>Check the preview before saving. Keep important details in plain text.</li>
+      </ol>
+      <p>The results are text characters, so you do not need to download a font or install an app. Your device may display some styles differently.</p>
       <h2>Aesthetic TikTok fonts</h2>
       <p>
-        On TikTok the favourite styles are <b>Script</b>, <b>Small Caps</b>, <b>Aesthetic</b>
+        Try <b>Script</b>, <b>Small Caps</b>, <b>Aesthetic</b>
         (ｗｉｄｅ) and <b>Tiny</b> (ᵗⁱⁿʸ) text. Use them in your display name and one line of your
         bio for a clean, eye-catching profile.
       </p>
+      <h2>Decorate your TikTok name with symbols</h2>
+      <p>Add a star or heart around a short name, such as ✦ Alex ✦ or ♡ Alex ♡.
+        Our <a href="/symbols/">copy-and-paste symbols</a> tool has more options.
+        Keep your @username easy to type and use decoration sparingly in your display name.</p>
       <p>Need bio ideas? Try our <a href="/instagram-bio-generator/">bio generator</a> — the bios work on TikTok too.</p>
     </section>
   </Fragment>
